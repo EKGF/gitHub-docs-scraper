@@ -1,0 +1,1 @@
+print("__main__", __file__)

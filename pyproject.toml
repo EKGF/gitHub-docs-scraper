@@ -1,0 +1,55 @@
+[project]
+name = "github-docs-scraper"
+version = "0.1.0"
+description = "A tool to download a GitHub repository, scan for Markdown files, and combine them into a single file."
+authors = [{ name = "Jacobus Geluk", email = "jacobus.geluk@ekgf.org" }]
+readme = "README.md"
+requires-python = ">=3.13"
+keywords = ["scraper", "github", "markdown"]
+dependencies = [
+    "python-dotenv>=1.0.1",
+    "requests>=2.31.0",     # For downloading the GitHub repository
+]
+
+[project.scripts]
+github-docs-scraper = "github-docs-scraper.__main__:main"
+
+[tool.uv]
+package = true                                              # Enable script installation for non-packaged projects
+dev-dependencies = ["hatch", "hatchling", "uvloop>=0.14.0"]
+
+[tool.black]
+# Optional: Configuration for Black (code formatter)
+line-length = 88
+target-version = ['py313']
+
+[tool.isort]
+# Optional: Configuration for isort (import sorting)
+profile = "black"
+line_length = 88
+
+[tool.pytest.ini_options]
+# Optional: Configuration for pytest (testing framework)
+testpaths = ["tests"]
+addopts = "--cov=combine_markdown --cov-report=term-missing"
+
+[tool.ruff]
+# Optional: Configuration for Ruff (linter)
+select = ["E", "F", "W", "I", "B", "C4", "ARG", "D", "N", "PT", "T", "UP"]
+ignore = []
+line-length = 88
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/scraper"]
+only-include = ["src/scraper"]
+source = "src"
+
+[tool.hatch.build.targets.sdist]
+packages = ["src/scraper"]
+only-include = ["src/scraper"]
+source = "src"
+exclude = [".venv/"]
