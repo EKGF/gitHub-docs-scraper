@@ -3,3 +3,4 @@ combined_markdown.md
 .egg-info/
 __pycache__/
 .env.local
+.idea/
